@@ -37,6 +37,56 @@ At step 3,800, baseline's unconstrained routing matrices drift into unstable con
 
 **mHC offers a principled architectural solution** instead of hyperparameter band-aids.
 
+## Experimental Results
+
+### Gradient Flow Comparison (100 Layers, 6000 Steps)
+
+<p align="center">
+  <img src="mhc_hc_gradient_flow_100L.png" alt="Gradient Flow Comparison" width="100%"/>
+</p>
+
+**Left (Baseline)**: Catastrophic gradient vanishing (10⁻¹⁷) with explosion at step ~3,800  
+**Right (mHC)**: Stable gradients (10⁻² to 10⁻⁷) throughout training
+
+---
+
+### Matrix Norm Evolution
+
+#### Baseline: Catastrophic Breakdown ❌
+
+<p align="center">
+  <img src="baseline_matrix_evol.png" alt="Baseline Matrix Evolution" width="90%"/>
+</p>
+
+- Stable until step ~3,800
+- Sudden collapse at step 3,800-4,000
+- Training dynamics fundamentally change
+
+#### mHC: Rock-Solid Stability ✅
+
+<p align="center">
+  <img src="mhc_matrix_evol.png" alt="mHC Matrix Evolution" width="90%"/>
+</p>
+
+- H_res norms: Perfectly flat at ~1.9 across all layers
+- No drift, no explosion, no vanishing
+
+---
+
+### Architecture Diagram
+
+<p align="center">
+  <img src="mhc (1).png" alt="mHC Architecture" width="70%"/>
+</p>
+
+---
+
+### Implementation
+
+📓 **Jupyter Notebook**: [mHC_implementation_git.ipynb](mHC_implementation_git.ipynb)
+
+Complete implementation with training loop, visualization, and analysis.
+
 ## Results Summary
 
 | Metric | Baseline (100L) | mHC (100L) |
